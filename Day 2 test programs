@@ -1,0 +1,103 @@
+      day 2 test programs
+
+
+1.#include <stdio.h>
+ 
+int main()
+{
+    int i, num1, num2, count = 0, sum = 0;
+ 
+    printf("Enter the value of num1 and num2 \n");
+    scanf("%d %d", &num1, &num2);
+    /* Count the number and compute their sum*/
+    printf("Integers divisible by 5 are \n");
+    for (i = num1; i < num2; i++)
+    {
+        if (i % 5 == 0)
+        {
+            printf("%3d,", i);
+            count++;
+            sum = sum + i;
+        }
+    }
+    printf("\n Number of integers divisible by 5 between %d and %d = %d\n", num1, num2, count);
+    printf("Sum of all integers that are divisible by 5 = %d\n", sum);
+}
+
+2.program:
+#include <stdio.h>
+
+int main() {
+
+    int num1, num2;
+
+    printf("Enter First Number: ");
+    scanf("%d", &num1);
+
+    printf("Enter Second Number: ");
+    scanf("%d", &num2);
+
+    if (num1 == num2) {
+        printf("Both numbers are equal.");
+    } else {
+        printf("Numbers are not equal");
+    }
+
+    return 0;
+
+}
+
+3.program:
+#include <stdio.h>
+ 
+int main(void)
+{
+    int num, sum = 0, rem;
+    printf("Enter a number: ");
+    scanf("%d", &num);
+ 
+    // Keep dividing until the number is not zero
+    while (num != 0)
+    {
+        rem = num % 10;
+        sum = sum + rem;
+        num = num / 10;
+    }
+    printf("Sum of digits of the number is %d", sum);
+    return 0;
+}
+4.program:
+#include <stdio.h>
+int main()
+{
+    int number, sum = 0, remainder, count;
+ 
+    printf("Enter a number: ");
+    scanf("%d", &number);
+    while (number)
+    {
+        remainder = number % 10;
+        sum  = sum + (remainder + 1);
+        number /= 10;
+    }
+    printf("increasing 1 to all digits:  %d", sum);
+    return 0;
+}
+
+5.program:
+#include <stdio.h>
+int main()
+{
+    int number, sum = 0, remainder, count;
+ 
+    printf("Enter a number: ");
+    scanf("%d", &number);
+    while (number)
+    {
+        remainder = number % 10;
+        sum  = sum + (remainder + 1);
+        number /= 10;
+    }
+    printf("increasing 1 to all digits:  %d", sum);
+    return 0;
+}
