@@ -1,0 +1,176 @@
+
+                        completed programs(21/02/24)(wednesday)
+
+
+1.Given an array of integers, find the maximum difference between any two elements in the array
+   
+#include <stdio.h>
+int maxDiff(int arr[], int n) {
+    if (n < 2) {
+        printf("Array must contain at least two elements\n");
+        return -1; // return -1 for error
+    }
+
+    int minElement = arr[0];
+    int maxElement = arr[0];
+
+    // Find the minimum and maximum elements in the array
+    for (int i = 1; i < n; i++) {
+        if (arr[i] < minElement) {
+            minElement = arr[i];
+        }
+        if (arr[i] > maxElement) {
+            maxElement = arr[i];
+        }
+    }
+
+    // Calculate the maximum difference
+    int maxDifference = maxElement - minElement;
+
+    return maxDifference;
+}
+
+int main() {
+    int arr[] = {7, 1, 5, 3, 6, 4};
+    int n = sizeof(arr) / sizeof(arr[0]);
+
+    int maxDifference = maxDiff(arr, n);
+    if (maxDifference != -1) {
+        printf("Maximum difference between any two elements: %d\n", maxDifference);
+    }
+
+    return 0;
+}
+
+2.Given two arrays of integers, find the common elements between them.
+#include <stdio.h>
+
+int lenOfLongIncSubArr(int arr[], int n) {
+    int max = 1, len = 1;
+    for (int i = 1; i < n; i++) {
+        if (arr[i] > arr[i - 1])
+            len++;
+        else {
+            if (max < len)
+                max = len;
+            len = 1;
+        }
+    }
+    if (max < len)
+        max = len;
+    return max;
+}
+
+int main() {
+    int arr[] = {5, 6, 3, 5, 7, 8, 9, 1, 2};
+    int n = sizeof(arr) / sizeof(arr[0]);
+    printf("Length of longest increasing subarray: %d\n", lenOfLongIncSubArr(arr, n));
+    return 0;
+}
+
+
+3.Given an array of integers, find the element that appears more than n/2 times (where n is the size of the array).
+#include <stdio.h>
+
+int main() {
+    int array1[] = {8, 2, 3, 4, 5, 6, 7, 1};
+    int array2[] = {4, 5, 7, 11, 6, 1};
+    int result[100]; // To store common elements
+    int i, j, flag, x, k = 0;
+
+    printf("Common elements are: ");
+    for (i = 0; i < sizeof(array1) / sizeof(array1[0]); i++) {
+        for (j = 0; j < sizeof(array2) / sizeof(array2[0]); j++) {
+            if (array1[i] == array2[j]) {
+                flag = 0;
+                for (x = 0; x < k; x++) {
+                    if (result[x] == array1[i]) {
+                        flag++;
+                    }
+                }
+                if (flag == 0) {
+                    result[k] = array1[i];
+                    printf("%d ", result[k]);
+                    k++;
+                }
+            }
+        }
+    }
+    return 0;
+}
+
+
+4.Given an array of integers, find the subarray with the largest sum.
+#include <stdio.h>
+
+int main() {
+    int arr[] = {20, 25, 25, 25, 25, 42, 67}; // Sorted array
+    int item = 25; // Element to check
+    int count = 0;
+    int size = sizeof(arr) / sizeof(arr[0]);
+
+    for (int loop = 0; loop < size; loop++) {
+        if (item == arr[loop])
+            count++;
+    }
+
+    if (count > (size / 2))
+        printf("The number %d appears more than %d times in arr[]\n", item, size / 2);
+    else
+        printf("The number %d does not appear more than %d times in arr[]\n", item, size / 2);
+
+    return 0;
+}
+
+5.Given an array of integers, rotate the array by k positions to the right.
+#include <stdio.h>
+
+int maxSum(int arr[], int n) {
+    int max_ending_here = arr[0];
+    int max_so_far = arr[0];
+
+    for (int i = 1; i < n; i++) {
+        max_ending_here = (arr[i] > max_ending_here + arr[i]) ? arr[i] : max_ending_here + arr[i];
+        max_so_far = (max_so_far > max_ending_here) ? max_so_far : max_ending_here;
+    }
+
+    return max_so_far;
+}
+
+int main() {
+    int arr[] = {8, 3, 8, -5, 4, 3, -4, 3, 5};
+    int n = sizeof(arr) / sizeof(arr[0]);
+
+    printf("The largest sum of a contiguous subarray is: %d\n", maxSum(arr, n));
+    return 0;
+}
+6.Given an array of integers, rearrange the array in such a way that all the even elements come before the odd elements.
+#include <stdio.h>
+
+void rightRotate(int arr[], int size, int k) {
+    int temp[k];
+    for (int i = 0; i < k; i++) {
+        temp[i] = arr[size - k + i];
+    }
+    for (int i = size - 1; i >= k; i--) {
+        arr[i] = arr[i - k];
+    }
+    for (int i = 0; i < k; i++) {
+        arr[i] = temp[i];
+    }
+}
+
+int main() {
+    int arr[] = {1, 2, 3, 4, 5, 6, 7};
+    int size = sizeof(arr) / sizeof(arr[0]);
+    int k = 3;
+
+    rightRotate(arr, size, k);
+
+    printf("Array after right rotation:\n");
+    for (int i = 0; i < size; i++) {
+        printf("%d ", arr[i]);
+    }
+
+    return 0;
+}
