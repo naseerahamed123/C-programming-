@@ -1,0 +1,443 @@
+          Day 2 completed programs
+
+
+
+7.#include <stdio.h>
+
+void rearrange(int arr[], int n) {
+    for (int i = 0; i < n; i++) {
+        if (arr[i] % 2 == 0) {
+            // Even element found, swap it with the next odd element
+            for (int j = i + 1; j < n; j++) {
+                if (arr[j] % 2 != 0) {
+                    int temp = arr[i];
+                    arr[i] = arr[j];
+                    arr[j] = temp;
+                    break;
+                }
+            }
+        }
+    }
+}
+
+int main() {
+    int arr[] = {1, 3, 2, 4, 7, 6, 5};
+    int n = sizeof(arr) / sizeof(arr[0]);
+
+    printf("Original array: ");
+    for (int i = 0; i < n; i++) {
+        printf("%d ", arr[i]);
+    }
+
+    rearrange(arr, n);
+
+    printf("\nRearranged array: ");
+    for (int i = 0; i < n; i++) {
+        printf("%d ", arr[i]);
+    }
+
+    return 0;
+} 
+
+
+8.program:
+#include <stdio.h>
+
+int findSubArray(int arr[], int n) {
+    int sum = 0;
+    int maxSize = -1;
+    int startIndex;
+
+    for (int i = 0; i < n - 1; i++) {
+        sum = (arr[i] == 0) ? -1 : 1;
+
+        for (int j = i + 1; j < n; j++) {
+            (arr[j] == 0) ? (sum += -1) : (sum += 1);
+
+            if (sum == 0 && maxSize < j - i + 1) {
+                maxSize = j - i + 1;
+                startIndex = i;
+            }
+        }
+    }
+
+    if (maxSize == -1)
+        printf("No such subarray found.\n");
+    else
+        printf("Subarray found from index %d to %d\n", startIndex, startIndex + maxSize - 1);
+
+    return maxSize;
+}
+
+int main() {
+    int arr[] = {1, 0, 0, 1, 0, 1, 1};
+    int size = sizeof(arr) / sizeof(arr[0]);
+
+    findSubArray(arr, size);
+    return 0;
+}
+
+
+9.program:
+#include<stdio.h>
+int firstmissingpos(int arr[],int n)
+{
+	bool present[n+1]={false};
+	for(int i=0;i<n;i++){
+		if(arr[i]>0&&arr[i]<=n)
+		present[arr[i]]=true;
+	}
+	for(int i=1;i<=n;i++){
+		if(!present[i])
+		return i;
+	}
+	return n+1;
+}
+int main()
+{
+	int arr[]={0,10,2,-10,-20};
+	int size=sizeof(arr)/sizeof(arr[0]);
+	printf("the smallest missing positive integer is:%d\n",firstmissingpos(arr,size));
+	return 0;
+}
+
+10.program:
+#include<stdio.h>
+int maxsubarrayproduct(int arr[],int n){
+	int result=arr[0];
+	for(int i=0;i<n;i++){
+		int mul=arr[i];
+		for(int j=i+1;j<n;j++){
+			result=(result> mul)?result: mul;
+			mul *= arr[j];
+		}
+		result=(result > mul)?result : mul;
+	}
+	return result;
+}
+int main(){
+	int arr[]={1,-2,-3,0,7,-8,-2};
+	int n= sizeof(arr)/sizeof(arr[0]);
+	printf("maximum subarray product is:%d\n",
+	maxsubarrayproduct(arr,n));
+	return 0;
+	}
+11.program:
+#include <bits/stdc++.h>
+using namespace std;
+
+int firstMissingPos(int A[], int n) {
+    bool present[n + 1] = {false};
+    for (int i = 0; i < n; i++) {
+        if (A[i] > 0 && A[i] <= n)
+            present[A[i]] = true;
+    }
+    for (int i = 1; i <= n; i++) {
+        if (!present[i])
+            return i;
+    }
+    return n + 1;
+}
+
+int main() {
+    int arr[] = {0, 10, 2, -10, -20};
+    int size = sizeof(arr) / sizeof(arr[0]);
+    cout << firstMissingPos(arr, size);
+}
+
+12.program:
+#include<stdio.h>
+#include<limits.h>
+void findmaximumproduct(int arr[],int n){
+	if(n<2){
+		printf("no pairs exits\n");
+		return ;
+	}
+	int maximumproduct=INT_MIN;
+	int max_i,max_j;
+	for(int i=0;i<n-1;i++){
+		for(int j=i+1;j<n;j++){
+			if(maximumproduct<arr[i]*arr[j]){
+				maximumproduct=arr[i]*arr[j];
+				max_i=i,max_j=j;
+			}
+		}
+	}
+	printf("pair is (%d,%d)\n",arr[max_i],arr[max_j]);
+}
+int main()
+{
+	int arr[]={-10,-3,5,6,-2};
+	int n=sizeof(arr)/sizeof(arr[0]);
+	findmaximumproduct(arr,n);
+	return 0;
+}
+13.program:
+#include <stdio.h>
+
+int maxProduct(int arr[], int n) {
+    int max_product = -999999999;
+    for (int i = 0; i < n - 1; i++) {
+        for (int j = i + 1; j < n; j++) {
+            int product = arr[i] * arr[j];
+            if (product > max_product) {
+                max_product = product;
+            }
+        }
+    }
+    return max_product;
+}
+
+int main() {
+    int arr[] = {1, -2, -3, 0, 7, -8, -2};
+    int n = sizeof(arr) / sizeof(arr[0]);
+    printf("Maximum subarray product is %d\n", maxProduct(arr, n));
+    return 0;
+}
+
+14.program:
+#include <stdio.h>
+
+// Function to find the longest subarray with the given sum
+void findLongestSubarray(int arr[], int n, int targetSum) {
+    int start = 0; // Initialize the starting index of the subarray
+    int maxLength = 0; // Initialize the maximum length of the subarray
+    int currentSum = 0; // Initialize the current sum of the subarray
+
+    for (int end = 0; end < n; end++) {
+        currentSum += arr[end]; // Add the current element to the sum
+
+        // Check if the current sum equals the target sum
+        while (currentSum > targetSum) {
+            currentSum -= arr[start]; // Remove elements from the start
+            start++; // Move the start index forward
+        }
+
+        // Update the maximum length if needed
+        if (currentSum == targetSum && (end - start + 1) > maxLength) {
+            maxLength = end - start + 1;
+        }
+    }
+
+    if (maxLength > 0) {
+        printf("Longest subarray with sum %d is of length %d\n", targetSum, maxLength);
+    } else {
+        printf("No subarray found with sum %d\n", targetSum);
+    }
+}
+
+int main() {
+    int arr[] = {1, 4, 20, 3, 10, 5};
+    int n = sizeof(arr) / sizeof(arr[0]);
+    int targetSum = 33;
+
+    findLongestSubarray(arr, n, targetSum);
+    return 0;
+}
+
+15.program:#include <stdio.h>
+#include <stdbool.h>
+
+const int MAX = 100;
+
+bool findSaddlePoint(int mat[MAX][MAX], int n) {
+    for (int i = 0; i < n; i++) {
+        int min_row = mat[i][0];
+        int col_ind = 0;
+
+        // Find the minimum element in the current row
+        for (int j = 1; j < n; j++) {
+            if (mat[i][j] < min_row) {
+                min_row = mat[i][j];
+                col_ind = j;
+            }
+        }
+
+        // Check if the row minimum element is also maximum in its column
+        int k;
+        for (k = 0; k < n; k++) {
+            if (min_row < mat[k][col_ind]) {
+                break;
+            }
+        }
+
+        // If yes, then it's a saddle point
+        if (k == n) {
+            printf("Value of Saddle Point: %d\n", min_row);
+            return true;
+        }
+    }
+
+    return false;
+}
+
+int main() {
+    int mat[MAX][MAX] = {
+        {1, 2, 3},
+        {4, 5, 6},
+        {7, 8, 9}
+    };
+    int n = 3;
+
+    if (!findSaddlePoint(mat, n)) {
+        printf("No Saddle Point\n");
+    }
+
+    return 0;
+}
+
+16.program:
+#include<stdio.h>
+void swap(int *a, int *b){
+	*a=*a+*b;
+	*b=*a-*b;
+	*a=*a-*b;
+}
+int main()
+{
+	int num1,num2;
+	printf("enter value of num1:");
+	scanf("%d",&num1);
+	printf("enter value of num2:");
+	scanf("%d",&num2);
+	printf("before swapping:num1=%d,num2=%d\n",num1,num2);
+	swap(&num1,&num2);
+	printf("after swapping:num1=%d,num2=%d\n",num1,num2);
+	return 0;
+}
+17.program:
+#include <stdio.h>
+
+int string_length(char* given_string) {
+    int length = 0;
+    while (*given_string != '\0') {
+        length++;
+        given_string++;
+    }
+    return length;
+}
+
+int main() {
+    char given_string[] = "ala venkata narasimha rao";
+    printf("Length of the String: %d", string_length(given_string));
+    return 0;
+}
+
+18.program:
+#include <stdio.h>
+#include <string.h>
+
+void reverseString(char* str) {
+    int length = strlen(str);
+    char* start_ptr = str;
+    char* end_ptr = str + length - 1;
+
+    while (start_ptr < end_ptr) {
+        char temp = *start_ptr;
+        *start_ptr = *end_ptr;
+        *end_ptr = temp;
+        start_ptr++;
+        end_ptr--;
+    }
+}
+
+int main() {
+    char str[100];
+    printf("Enter a string: ");
+    scanf("%s", str);
+
+    reverseString(str);
+
+    printf("Reversed string: %s\n", str);
+    return 0;
+}
+
+19.program:
+#include <stdio.h>
+#include <stdbool.h>
+#include <string.h>
+#include <stdlib.h>
+
+// Function to check if a string is a valid IPv4 address
+bool isValidIPv4Address(const char* ipAddress) {
+    int segs = 0; // Segment count
+    int chcnt = 0; // Character count within segment
+    int accum = 0; // Accumulator for segment value
+
+    while (*ipAddress) {
+        if (*ipAddress == '.') {
+            // Check segment validity
+            if (chcnt == 0 || accum > 255)
+                return false;
+            segs++;
+            accum = 0;
+            chcnt = 0;
+        } else if (*ipAddress >= '0' && *ipAddress <= '9') {
+            // Accumulate segment value
+            accum = accum * 10 + (*ipAddress - '0');
+            chcnt++;
+        } else {
+            // Invalid character
+            return false;
+        }
+        ipAddress++;
+    }
+
+    // Check the last segment
+    if (segs != 3 || chcnt == 0 || accum > 255)
+        return false;
+
+    return true;
+}
+
+int main() {
+    const char* testIP = "192.168.1.10"; // Replace with your input
+    if (isValidIPv4Address(testIP))
+        printf("%s is a valid IPv4 address.\n", testIP);
+    else
+        printf("%s is not a valid IPv4 address.\n", testIP);
+
+    return 0;
+}
+
+20.program:
+#include <stdio.h>
+#include <ctype.h>
+
+int is_pangram(const char *str) {
+   int alphabet[26] = {0}; // Array to track presence of letters
+
+   // Iterate through each character in the string
+   while (*str) {
+       if (isalpha(*str)) {
+           char ch = tolower(*str);  // Convert to lowercase
+           alphabet[ch - 'a'] = 1;   // Mark the corresponding letter as present
+       }
+       str++;
+   }
+
+   // Check if all letters are marked as present
+   for (int i = 0; i < 26; i++) {
+       if (alphabet[i] == 0) {
+           return 0;  // Not a pangram
+       }
+   }
+
+   return 1;  // Pangram
+}
+
+int main() {
+   char str[100];
+
+   printf("Enter a string: ");
+   fgets(str, 100, stdin);
+
+   if (is_pangram(str)) {
+       printf("%s is a pangram.\n", str);
+   } else {
+       printf("%s is not a pangram.\n", str);
+   }
+
+   return 0;
+}
+
