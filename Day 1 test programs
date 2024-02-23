@@ -1,0 +1,107 @@
+1.program
+#include<stdio.h>
+int main()
+{
+	int n;
+	printf("enter the number:");
+	scanf("%d",&n);
+	if(n%2==0)
+	printf("the number is even:");
+	else 
+	printf("the number is odd:");
+	return 0;
+}
+
+2.program
+#include <stdio.h>
+int main(){
+    int i, num, even_sum = 0, odd_sum = 0;
+    
+    // Asking for Input
+    printf("Enter the Maximum Value: ");
+    scanf("%d", &num);
+    
+    for (i = 1; i <= num; i++){
+        if (i % 2 == 0){
+            even_sum = even_sum + i;
+        }
+        else{
+            odd_sum = odd_sum + i;
+        }
+    }
+    printf("The Sum of all Even Numbers up to %d is %d.\n", num, even_sum);
+    printf("The Sum of all Odd Numbers up to %d is %d.", num, odd_sum);
+    return 0;
+	}
+
+
+3.program 
+#include <stdio.h>
+
+int main() {
+
+    double num;
+    printf("Enter a number: ");
+    scanf("%lf", &num);
+    if (num <= 0.0) {
+        if (num == 0.0)
+            printf("You entered 0.");
+        else
+            printf("You entered a negative number.");
+    } 
+    else
+        printf("You entered a positive number.");
+
+    return 0;
+}
+
+
+
+4.program
+#include <stdio.h>
+
+int main() {
+
+  double n1, n2, n3;
+
+  printf("Enter three different numbers: ");
+  scanf("%lf %lf %lf", &n1, &n2, &n3);
+
+  // if n1 is greater than both n2 and n3, n1 is the largest
+  if (n1 >= n2 && n1 >= n3)
+    printf("%.2f is the largest number.", n1);
+
+  // if n2 is greater than both n1 and n3, n2 is the largest
+  if (n2 >= n1 && n2 >= n3)
+    printf("%.2f is the largest number.", n2);
+
+  // if n3 is greater than both n1 and n2, n3 is the largest
+  if (n3 >= n1 && n3 >= n2)
+    printf("%.2f is the largest number.", n3);
+
+  return 0;
+}
+
+5.program
+#include<stdio.h>
+int main() {
+  double first, second, temp;
+  printf("Enter first number: ");
+  scanf("%lf", &first);
+  printf("Enter second number: ");
+  scanf("%lf", &second);
+
+  // value of first is assigned to temp
+  temp = first;
+
+  // value of second is assigned to first
+  first = second;
+
+  // value of temp (initial value of first) is assigned to second
+  second = temp;
+
+  // %.2lf displays number up to 2 decimal points
+  printf("\nAfter swapping, first number = %.2lf\n", first);
+  printf("After swapping, second number = %.2lf", second);
+  return 0;
+}
